@@ -1,4 +1,5 @@
 import "@/assets/style/globals.css";
+import Navbar from "@/components/Navbar";
 import { FC, ReactNode } from "react";
 
 interface IMainLayoutProps {
@@ -20,6 +21,7 @@ const MainLayout: FC<IMainLayoutProps> = ({ children }) => {
   return (
     <html>
       <body>
+        <Navbar />
         <main>{children}</main>
       </body>
     </html>
