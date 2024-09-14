@@ -1,11 +1,22 @@
-import "@/assets/styles/globals.css";
+import "@/assets/style/globals.css";
 import { FC, ReactNode } from "react";
 
-interface MainLayoutProps {
+interface IMainLayoutProps {
   children: ReactNode;
 }
+interface IMetadata {
+  title: string;
+  keywords: string;
+  description: string;
+}
 
-const MainLayout: FC<MainLayoutProps> = ({ children }) => {
+export const metadata: IMetadata = {
+  title: "Property Pulse",
+  keywords: "rental, property, real estate",
+  description: "Find the perfect rental property",
+};
+
+const MainLayout: FC<IMainLayoutProps> = ({ children }) => {
   return (
     <html>
       <body>
