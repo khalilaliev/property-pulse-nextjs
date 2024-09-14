@@ -1,4 +1,5 @@
 import "@/assets/style/globals.css";
+import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import { FC, ReactNode } from "react";
 
@@ -23,6 +24,7 @@ const MainLayout: FC<IMainLayoutProps> = ({ children }) => {
       <body>
         <Navbar />
         <main>{children}</main>
+        <Footer />
       </body>
     </html>
   );
