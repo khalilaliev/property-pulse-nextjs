@@ -1,0 +1,134 @@
+import Image from "next/image";
+import Link from "next/link";
+import { FC } from "react";
+import {
+  FaMapMarker,
+  FaBath,
+  FaBed,
+  FaMoneyBill,
+  FaRulerCombined,
+} from "react-icons/fa";
+
+interface ILocation {
+  street: string;
+  city: string;
+  state: string;
+  zipcode: string;
+}
+
+interface IRates {
+  weekly: number;
+  monthly?: number;
+  nightly?: number;
+}
+
+interface ISellerInfo {
+  name: string;
+  email: string;
+  phone: string;
+}
+
+interface IProperty {
+  amenities: string[];
+  baths: number;
+  beds: number;
+  createdAt: string;
+  description: string;
+  images: string[];
+  is_featured: boolean;
+  location: ILocation;
+  name: string;
+  owner: string;
+  rates: IRates;
+  seller_info: ISellerInfo;
+  square_feet: number;
+  type: string;
+  updatedAt: string;
+  _id: string;
+}
+
+interface IProp {
+  property: IProperty;
+}
+
+const PropertyCard: FC<IProp> = ({ property }) => {
+  const getRateDisplay = (): string | undefined => {
+    const { rates } = property;
+    if (rates.monthly) {
+      return `$${rates.monthly.toLocaleString()}/mo`;
+    } else if (rates.weekly) {
+      return `$${rates.weekly.toLocaleString()}/wk`;
+    } else if (rates.nightly) {
+      return `$${rates.weekly.toLocaleString()}/night`;
+    }
+  };
+
+  return (
+    <div className="rounded-xl shadow-md relative">
+      <Image
+        src={`/images/properties/${property.images[0]}`}
+        alt={property.name}
+        width={0}
+        height={0}
+        sizes="100vh"
+        className="w-full h-auto rounded-t-xl"
+      />
+      <div className="p-4">
+        <div className="text-left md:text-center lg:text-left mb-6">
+          <div className="text-gray-600">{property.type}</div>
+          <h3 className="text-xl font-bold">{property.name}</h3>
+        </div>
+        <h3 className="absolute top-[10px] right-[10px] bg-white px-4 py-2 rounded-lg text-blue-500 font-bold text-right md:text-center lg:text-right">
+          {getRateDisplay()}
+        </h3>
+
+        <div className="flex justify-center gap-4 text-gray-500 mb-4">
+          <p>
+            <FaBed className="md:hidden lg:inline" /> {property.beds}
+            <span className="md:hidden lg:inline"> Beds</span>
+          </p>
+          <p>
+            <FaBath className="md:hidden lg:inline" /> {property.baths}
+            <span className="md:hidden lg:inline"> Baths</span>
+          </p>
+          <p>
+            <FaRulerCombined className="md:hidden lg:inline" />
+            {property.square_feet}{" "}
+            <span className="md:hidden lg:inline">sqft</span>
+          </p>
+        </div>
+
+        <div className="flex justify-center gap-4 text-green-900 text-sm mb-4">
+          <p>
+            <FaMoneyBill className="md:hidden lg:inline" /> $
+            {property.rates.weekly} Weekly
+          </p>
+          <p>
+            <FaMoneyBill className="md:hidden lg:inline" /> $
+            {property.rates.monthly} Monthly
+          </p>
+        </div>
+
+        <div className="border border-gray-100 mb-5"></div>
+
+        <div className="flex flex-col lg:flex-row justify-between mb-4">
+          <div className="flex align-middle gap-2 mb-4 lg:mb-0">
+            <FaMapMarker className="text-orange-700 mt-1" />
+            <span className="text-orange-700">
+              {" "}
+              {property.location.city}, {property.location.state}{" "}
+            </span>
+          </div>
+          <Link
+            href={`/properties/${property._id}`}
+            className="h-[36px] bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg text-center text-sm"
+          >
+            Details
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default PropertyCard;
