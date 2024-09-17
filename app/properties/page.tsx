@@ -1,47 +1,10 @@
 "use client";
 import PropertyCard from "@/components/Card/PropertyCard";
+import { IProperty } from "@/interfaces";
 import properties from "@/properties.json";
 import { FC } from "react";
 
 console.log(properties);
-
-interface ILocation {
-  street: string;
-  city: string;
-  state: string;
-  zipcode: string;
-}
-
-interface IRates {
-  weekly: number;
-  monthly?: number;
-  nightly?: number;
-}
-
-interface ISellerInfo {
-  name: string;
-  email: string;
-  phone: string;
-}
-
-interface IProperty {
-  amenities: string[];
-  baths: number;
-  beds: number;
-  createdAt: string;
-  description: string;
-  images: string[];
-  is_featured: boolean;
-  location: ILocation;
-  name: string;
-  owner: string;
-  rates: IRates;
-  seller_info: ISellerInfo;
-  square_feet: number;
-  type: string;
-  updatedAt: string;
-  _id: string;
-}
 
 const propertiesTyped: IProperty[] = properties;
 

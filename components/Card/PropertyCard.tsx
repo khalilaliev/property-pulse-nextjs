@@ -1,3 +1,4 @@
+import { IProperty } from "@/interfaces";
 import Image from "next/image";
 import Link from "next/link";
 import { FC } from "react";
@@ -8,44 +9,6 @@ import {
   FaMoneyBill,
   FaRulerCombined,
 } from "react-icons/fa";
-
-interface ILocation {
-  street: string;
-  city: string;
-  state: string;
-  zipcode: string;
-}
-
-interface IRates {
-  weekly: number;
-  monthly?: number;
-  nightly?: number;
-}
-
-interface ISellerInfo {
-  name: string;
-  email: string;
-  phone: string;
-}
-
-interface IProperty {
-  amenities: string[];
-  baths: number;
-  beds: number;
-  createdAt: string;
-  description: string;
-  images: string[];
-  is_featured: boolean;
-  location: ILocation;
-  name: string;
-  owner: string;
-  rates: IRates;
-  seller_info: ISellerInfo;
-  square_feet: number;
-  type: string;
-  updatedAt: string;
-  _id: string;
-}
 
 interface IProp {
   property: IProperty;
