@@ -1,13 +1,16 @@
 import { FC } from "react";
-import properties from "@/properties.json";
 import PropertyCard from "./Card/PropertyCard";
 import { IProperty } from "@/interfaces";
 import Link from "next/link";
+import connectDb from "@/config/database";
+import Property from "@/models/Property";
 
-const propertiesTyped: IProperty[] = properties;
-
-const HomeProperties: FC = () => {
-  const recentProperties = propertiesTyped.slice(0, 3);
+const HomeProperties: FC = async () => {
+  await connectDb();
+  const recentProperties = (await Property.find({})
+    .sort({ createdAt: -1 })
+    .limit(3)
+    .lean()) as IProperty[];
 
   return (
     <>

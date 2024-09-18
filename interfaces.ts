@@ -20,6 +20,7 @@ interface ISellerInfo {
 }
 
 export interface IProperty {
+  owner: Types.ObjectId;
   amenities: string[];
   baths: number;
   beds: number;
@@ -29,7 +30,6 @@ export interface IProperty {
   is_featured: boolean;
   location: ILocation;
   name: string;
-  owner: string;
   rates: IRates;
   seller_info: ISellerInfo;
   square_feet: number;
@@ -44,12 +44,7 @@ export interface IUserSchema {
   image: string;
   bookmarks: string;
 }
-interface ILocation {
-  street: string;
-  city: string;
-  state: string;
-  zipcode: string;
-}
+
 export interface IPropertySchema {
   owner: Types.ObjectId;
   name: string;
@@ -60,8 +55,8 @@ export interface IPropertySchema {
   baths: number;
   square_feet: number;
   amenities: string[];
-  rates: number;
-  seller_info: string;
+  rates: IRates;
+  seller_info: ISellerInfo;
   images: string[];
   is_featured: boolean;
 }
