@@ -1,4 +1,5 @@
 import "@/assets/style/globals.css";
+import AuthProvider from "@/components/AuthProvider";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import { FC, ReactNode } from "react";
@@ -20,13 +21,15 @@ export const metadata: IMetadata = {
 
 const MainLayout: FC<IMainLayoutProps> = ({ children }) => {
   return (
-    <html>
-      <body>
-        <Navbar />
-        <main>{children}</main>
-        <Footer />
-      </body>
-    </html>
+    <AuthProvider>
+      <html>
+        <body>
+          <Navbar />
+          <main>{children}</main>
+          <Footer />
+        </body>
+      </html>
+    </AuthProvider>
   );
 };
 
