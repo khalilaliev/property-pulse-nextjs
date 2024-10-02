@@ -8,7 +8,7 @@ import { FC } from "react";
 
 interface IParams {
   params: {
-    id: number;
+    id: string;
   };
 }
 

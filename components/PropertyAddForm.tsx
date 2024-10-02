@@ -1,9 +1,10 @@
+import addProperty from "@/app/actions/addProperty";
 import { FC } from "react";
 
 const PropertyAddForm: FC = () => {
   return (
     <>
-      <form>
+      <form action={addProperty}>
         <h2 className="text-3xl text-center font-semibold mb-6">
           Add Property
         </h2>
@@ -351,7 +352,7 @@ const PropertyAddForm: FC = () => {
           <input
             type="text"
             id="seller_name"
-            name="seller_info.name."
+            name="seller_info.name"
             className="border rounded w-full py-2 px-3"
             placeholder="Name"
           />
