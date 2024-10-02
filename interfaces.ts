@@ -88,3 +88,7 @@ export interface IPropertyData {
   };
   images?: string[];
 }
+
+export interface IImageProp {
+  image: string;
+}

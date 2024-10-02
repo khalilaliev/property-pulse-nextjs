@@ -2,14 +2,14 @@ import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/utils/authOptions";
 import { Session } from "next-auth";
 
-interface ISessionUser {
+export interface ISessionUser {
   user: {
     name?: string | null;
     email?: string | null;
     image?: string | null;
   };
   userId: {
-    id?: string | null;
+    id?: string | null | undefined;
   };
 }
 

@@ -1,6 +1,7 @@
 import GoBack from "@/components/GoBack";
 import PropertyDetails from "@/components/PropertyDetails";
 import PropertyHeaderImage from "@/components/PropertyHeaderImage";
+import PropertyImages from "@/components/PropertyImages";
 import connectDb from "@/config/database";
 import { IProperty } from "@/interfaces";
 import Property from "@/models/Property";
@@ -28,6 +29,7 @@ const PropertyPage: FC<IParams> = async ({ params }) => {
           </div>
         </div>
       </section>
+      <PropertyImages images={property.images} />
     </>
   );
 };
