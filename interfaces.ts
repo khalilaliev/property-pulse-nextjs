@@ -60,3 +60,31 @@ export interface IPropertySchema {
   images: string[];
   is_featured: boolean;
 }
+
+export interface IPropertyData {
+  owner: string;
+  type: FormDataEntryValue | null;
+  name: FormDataEntryValue | null;
+  description: FormDataEntryValue | null;
+  location: {
+    street: FormDataEntryValue | null;
+    city: FormDataEntryValue | null;
+    state: FormDataEntryValue | null;
+    zipcode: FormDataEntryValue | null;
+  };
+  beds: FormDataEntryValue | null;
+  baths: FormDataEntryValue | null;
+  square_feet: FormDataEntryValue | null;
+  amenities: FormDataEntryValue[];
+  rates: {
+    nightly: FormDataEntryValue | null;
+    weekly: FormDataEntryValue | null;
+    monthly: FormDataEntryValue | null;
+  };
+  seller_info: {
+    name: FormDataEntryValue | null;
+    email: FormDataEntryValue | null;
+    phone: FormDataEntryValue | null;
+  };
+  images?: string[];
+}

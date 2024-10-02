@@ -1,6 +1,8 @@
 "use server";
 
+import cloudinary from "@/config/cloudinary";
 import connectDb from "@/config/database";
+import { IPropertyData } from "@/interfaces";
 import Property from "@/models/Property";
 import { getSessionUser } from "@/utils/getSessionUser";
 import { revalidatePath } from "next/cache";
@@ -20,10 +22,9 @@ async function addProperty(formData: FormData): Promise<void> {
     .getAll("images")
     .filter(
       (image): image is File => image instanceof File && image.name !== ""
-    )
-    .map((image: File) => image.name);
-  const propertyData = {
-    owner: userId,
+    );
+  const propertyData: IPropertyData = {
+    owner: userId as string,
     type: formData.get("type"),
     name: formData.get("name"),
     description: formData.get("description"),
@@ -47,8 +48,25 @@ async function addProperty(formData: FormData): Promise<void> {
       email: formData.get("seller_info.email"),
       phone: formData.get("seller_info.phone"),
     },
-    images,
   };
+
+  const imageUrls: string[] = [];
+
+  for (const imageFile of images) {
+    const imageBuffer = await imageFile.arrayBuffer();
+    const imageArray = Array.from(new Uint8Array(imageBuffer));
+    const imageData = Buffer.from(imageArray);
+    const imageBase64 = imageData.toString("base64");
+    const result = await cloudinary.uploader.upload(
+      `data:image/png;base64,${imageBase64}`,
+      {
+        folder: "propertypulse",
+      }
+    );
+    imageUrls.push(result.secure_url);
+  }
+
+  propertyData.images = imageUrls;
 
   const newProperty = new Property(propertyData);
   await newProperty.save();
