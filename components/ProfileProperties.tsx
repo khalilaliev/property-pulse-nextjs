@@ -1,6 +1,7 @@
 "use client";
 import { IProperty } from "@/interfaces";
 import Image from "next/image";
+import Link from "next/link";
 import { FC, useState } from "react";
 
 interface IProfilePropertyProp {
@@ -13,7 +14,7 @@ const ProfileProperties: FC<IProfilePropertyProp> = ({
   const [properties, setProperties] = useState(initialProperty);
   return properties.map((property) => (
     <div className="mb-10" key={property._id}>
-      <a href="/property.html">
+      <Link href={`/properties/${property._id}`}>
         <Image
           className="h-32 w-full rounded-md object-cover"
           src={property.images[0]}
@@ -21,7 +22,7 @@ const ProfileProperties: FC<IProfilePropertyProp> = ({
           width={1000}
           height={200}
         />
-      </a>
+      </Link>
       <div className="mt-2">
         <p className="text-lg font-semibold">{property.name}</p>
         <p className="text-gray-600">

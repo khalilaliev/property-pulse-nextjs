@@ -1,13 +1,14 @@
 import { FC } from "react";
-import { IImageProp } from "@/interfaces";
 import Image from "next/image";
-import { div } from "framer-motion/client";
 
 interface IPropImages {
   images: string[];
 }
 
 const PropertyImages: FC<IPropImages> = ({ images }) => {
+  if (!Array.isArray(images)) {
+    return <p>No images available</p>;
+  }
   return (
     <section className="bg-blue-50 p-4">
       <div className="container mx-auto">

@@ -17,6 +17,13 @@ const PropertyPage: FC<IParams> = async ({ params }) => {
   await connectDb();
 
   const property = (await Property.findById(params.id).lean()) as IProperty;
+  if (!property) {
+    return (
+      <h1 className="text-center mt-10 font-bold text-2xl">
+        Property not found
+      </h1>
+    );
+  }
 
   return (
     <>

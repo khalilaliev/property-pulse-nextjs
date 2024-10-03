@@ -20,7 +20,7 @@ interface ISellerInfo {
 }
 
 export interface IProperty {
-  owner: Types.ObjectId;
+  owner: Types.ObjectId | string;
   amenities: string[];
   baths: number;
   beds: number;
