@@ -51,8 +51,16 @@ const ProfilePage: FC = async (): Promise<JSX.Element> => {
             </div>
 
             <div className="md:w-3/4 md:pl-4">
-              <h2 className="text-xl font-semibold mb-4">Your Listings</h2>
-              <ProfileProperties properties={transformedProperties} />
+              {properties.length === 0 ? (
+                <h1 className="text-xl font-semibold mb-4">
+                  Your Listing is empty
+                </h1>
+              ) : (
+                <>
+                  <h2 className="text-xl font-semibold mb-4">Your Listings</h2>
+                  <ProfileProperties properties={transformedProperties} />
+                </>
+              )}
             </div>
           </div>
         </div>
