@@ -3,15 +3,9 @@ import PropertyDetails from "@/components/PropertyDetails";
 import PropertyHeaderImage from "@/components/PropertyHeaderImage";
 import PropertyImages from "@/components/PropertyImages";
 import connectDb from "@/config/database";
-import { IProperty } from "@/interfaces";
+import { IParams, IProperty } from "@/interfaces";
 import Property from "@/models/Property";
 import { FC } from "react";
-
-interface IParams {
-  params: {
-    id: string;
-  };
-}
 
 const PropertyPage: FC<IParams> = async ({ params }) => {
   await connectDb();

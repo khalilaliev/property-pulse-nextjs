@@ -92,3 +92,9 @@ export interface IPropertyData {
 export interface IImageProp {
   image: string;
 }
+
+export interface IParams {
+  params: {
+    id: string;
+  };
+}

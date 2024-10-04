@@ -5,6 +5,7 @@ import { ISessionUser } from "@/utils/getSessionUser";
 import Image from "next/image";
 import Link from "next/link";
 import { FC, useState } from "react";
+import { toast } from "react-toastify";
 
 interface IProfilePropertyProp {
   properties: IProperty[];
@@ -23,6 +24,7 @@ const ProfileProperties: FC<IProfilePropertyProp> = ({
       (property) => property._id !== propertyId
     );
     setProperties(updatedProperties);
+    toast.success("Property was successfully deleted");
   };
 
   return properties.map((property) => (
@@ -44,12 +46,12 @@ const ProfileProperties: FC<IProfilePropertyProp> = ({
         </p>
       </div>
       <div className="mt-2">
-        <a
-          href="/add-property.html"
+        <Link
+          href={`/properties/${property._id}/edit`}
           className="bg-blue-500 text-white px-3 py-3 rounded-md mr-2 hover:bg-blue-600"
         >
           Edit
-        </a>
+        </Link>
         <button
           className="bg-red-500 text-white px-3 py-2 rounded-md hover:bg-red-600"
           type="button"
