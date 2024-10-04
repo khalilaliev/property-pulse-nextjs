@@ -1,7 +1,6 @@
 "use client";
 import deleteProperty from "@/app/actions/deleteProperty";
 import { IProperty } from "@/interfaces";
-import { ISessionUser } from "@/utils/getSessionUser";
 import Image from "next/image";
 import Link from "next/link";
 import { FC, useState } from "react";
