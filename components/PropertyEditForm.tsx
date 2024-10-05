@@ -1,10 +1,6 @@
 import updateProperty from "@/app/actions/updateProperty";
-import { IProperty } from "@/interfaces";
+import { IProperty, IPropertyProp } from "@/interfaces";
 import { FC } from "react";
-
-interface IPropertyProp {
-  property: IProperty;
-}
 
 const PropertyEditForm: FC<IPropertyProp> = ({ property }) => {
   const updatePropertyById = updateProperty.bind(null, property._id);

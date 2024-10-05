@@ -2,7 +2,7 @@
 import cloudinary from "@/config/cloudinary";
 import { IProperty } from "@/interfaces";
 import Property from "@/models/Property";
-import { ISessionUser, getSessionUser } from "@/utils/getSessionUser";
+import { getSessionUser } from "@/utils/getSessionUser";
 import { revalidatePath } from "next/cache";
 
 async function deleteProperty(propertyId: string): Promise<void> {

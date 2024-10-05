@@ -98,3 +98,7 @@ export interface IParams {
     id: string;
   };
 }
+
+export interface IPropertyProp {
+  property: IProperty;
+}
