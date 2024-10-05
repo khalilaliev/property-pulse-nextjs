@@ -1,10 +1,8 @@
 import { AuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import { Session } from "next-auth";
-import SignInCallback from "next-auth";
 import User from "@/models/User";
 import connectDb from "@/config/database";
-import { profile } from "console";
 
 export const authOptions: AuthOptions = {
   providers: [

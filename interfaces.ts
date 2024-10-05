@@ -42,7 +42,7 @@ export interface IUserSchema {
   email: string;
   username: string;
   image: string;
-  bookmarks: string;
+  bookmarks: string[];
 }
 
 export interface IPropertySchema {

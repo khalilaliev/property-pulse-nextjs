@@ -75,7 +75,6 @@ const PropertyMap: FC<IPropertyProp> = ({ property }) => {
     lat !== null &&
     lng !== null && (
       <Map
-        // mapLib={import('mapbox-gl')}
         initialViewState={{
           latitude: lat,
           longitude: lng,

@@ -1,10 +1,11 @@
 import "@/assets/style/globals.css";
+import "react-toastify/dist/ReactToastify.css";
 import AuthProvider from "@/components/AuthProvider";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import { FC, ReactNode } from "react";
 import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+
 interface IMainLayoutProps {
   children: ReactNode;
 }
