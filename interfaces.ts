@@ -45,6 +45,19 @@ export interface IUserSchema {
   bookmarks: string[];
 }
 
+export interface IMessageSchema {
+  sender: Types.ObjectId;
+  recipient: Types.ObjectId;
+  property: Types.ObjectId;
+  email: string;
+  name: string;
+  phone: string;
+  body: string;
+  read: boolean;
+  createdAt?: Date;
+  updatedAt?: Date;
+}
+
 export interface IPropertySchema {
   owner: Types.ObjectId;
   name: string;
