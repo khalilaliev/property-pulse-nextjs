@@ -4,17 +4,17 @@ import { Schema, model, models } from "mongoose";
 const MessageSchema = new Schema<IMessageSchema>(
   {
     sender: {
-      type: Schema.ObjectId,
+      type: Schema.Types.ObjectId,
       ref: "User",
       required: true,
     },
     recipient: {
-      type: Schema.ObjectId,
+      type: Schema.Types.ObjectId,
       ref: "User",
       required: true,
     },
     property: {
-      type: Schema.ObjectId,
+      type: Schema.Types.ObjectId,
       ref: "Property",
       required: true,
     },

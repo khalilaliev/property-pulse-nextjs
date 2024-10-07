@@ -1,3 +1,5 @@
+import { Types } from "mongoose";
+
 type SerializableValue =
   | {
       toString: () => string;
@@ -6,6 +8,8 @@ type SerializableValue =
   | string
   | number
   | boolean
+  | Date
+  | Types.ObjectId
   | null
   | undefined;
 
@@ -18,7 +22,15 @@ export function convertToSerializableObject<K extends keyof any>(
   for (const key of Object.keys(leanDocument) as K[]) {
     const value = leanDocument[key];
 
-    if (value !== null && value !== undefined && typeof value === "object") {
+    if (value instanceof Types.ObjectId) {
+      result[key] = value.toString();
+    } else if (value instanceof Date) {
+      result[key] = value.toISOString();
+    } else if (
+      value !== null &&
+      value !== undefined &&
+      typeof value === "object"
+    ) {
       if (typeof value.toJSON === "function") {
         result[key] = value.toJSON() as
           | string

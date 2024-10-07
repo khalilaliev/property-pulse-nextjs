@@ -46,16 +46,22 @@ export interface IUserSchema {
 }
 
 export interface IMessageSchema {
+  _id?: string;
   sender: Types.ObjectId;
   recipient: Types.ObjectId;
   property: Types.ObjectId;
-  email: string;
   name: string;
-  phone: string;
-  body: string;
+  email: string;
+  body?: string;
+  phone?: string;
   read: boolean;
   createdAt?: Date;
   updatedAt?: Date;
+}
+
+export interface IMessageRead {
+  recipient: string;
+  read: true;
 }
 
 export interface IPropertySchema {
@@ -114,4 +120,23 @@ export interface IParams {
 
 export interface IPropertyProp {
   property: IProperty;
+}
+
+export interface IMessage {
+  _id: string;
+  sender: {
+    _id: string;
+    username: string;
+  };
+  property: {
+    _id: string;
+    name: string;
+  };
+  name: string;
+  email: string;
+  phone: string;
+  body: string;
+  read: boolean;
+  createdAt: Date;
+  updatedAt: Date;
 }
