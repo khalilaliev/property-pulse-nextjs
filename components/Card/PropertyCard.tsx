@@ -35,7 +35,7 @@ const PropertyCard: FC<IProp> = ({ property }) => {
           width={0}
           height={0}
           sizes="100vh"
-          className="w-full h-auto rounded-t-xl"
+          className="w-full min-h-96 object-cover h-auto rounded-t-xl"
         />
       </Link>
       <div className="p-4">
