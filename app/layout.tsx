@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import { FC, ReactNode } from "react";
 import { ToastContainer } from "react-toastify";
+import { GlobalProvider } from "@/context/GlobalContext";
 
 interface IMainLayoutProps {
   children: ReactNode;
@@ -24,14 +25,16 @@ export const metadata: IMetadata = {
 const MainLayout: FC<IMainLayoutProps> = ({ children }) => {
   return (
     <AuthProvider>
-      <html>
-        <body>
-          <Navbar />
-          <main>{children}</main>
-          <Footer />
-          <ToastContainer />
-        </body>
-      </html>
+      <GlobalProvider>
+        <html>
+          <body>
+            <Navbar />
+            <main>{children}</main>
+            <Footer />
+            <ToastContainer />
+          </body>
+        </html>
+      </GlobalProvider>
     </AuthProvider>
   );
 };

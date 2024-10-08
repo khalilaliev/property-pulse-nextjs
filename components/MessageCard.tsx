@@ -1,7 +1,8 @@
 "use client";
 import deleteMessage from "@/app/actions/deleteMessages";
 import markMessageAsRead from "@/app/actions/markMessageAsRead";
-import { IMessage } from "@/interfaces";
+import { useGlobalContext } from "@/context/GlobalContext";
+import { IGlobalContext, IMessage } from "@/interfaces";
 import { FC, useState } from "react";
 import { toast } from "react-toastify";
 
@@ -9,20 +10,32 @@ interface IMessageProp {
   message: IMessage;
 }
 
+interface IContext {
+  setUnreadMessage: (prevState: (value: number) => number) => void;
+}
+
 const MessageCard: FC<IMessageProp> = ({ message }): JSX.Element => {
   const [isRead, setIsRead] = useState<boolean>(message.read);
-  const [isDeleted, setIsDeleted] = useState<boolean>(message.read);
+  const [isDeleted, setIsDeleted] = useState<boolean>(false);
+
+  const { setUnreadMessage } = useGlobalContext() as IGlobalContext;
 
   const handleReadClick = async (): Promise<void> => {
     const read = await markMessageAsRead(message._id);
     // @ts-ignore
     setIsRead(read);
+    setUnreadMessage((prevState: number) =>
+      read ? prevState - 1 : prevState + 1
+    );
     toast.success(`Marked as ${read ? "Read" : "New"}`);
   };
 
   const handleDeleteClick = async () => {
     await deleteMessage(message._id);
     setIsDeleted(true);
+    setUnreadMessage((prevState: number) =>
+      isRead ? prevState : prevState - 1
+    );
     toast.success(`Message Deleted`);
   };
 

@@ -140,3 +140,8 @@ export interface IMessage {
   createdAt: Date;
   updatedAt: Date;
 }
+
+export interface IGlobalContext {
+  unreadMessage: number;
+  setUnreadMessage: (prevState: (value: number) => number) => void;
+}
