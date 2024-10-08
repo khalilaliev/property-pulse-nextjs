@@ -1,5 +1,4 @@
 import { IImageProp } from "@/interfaces";
-import { div } from "framer-motion/client";
 import Image from "next/image";
 import { FC } from "react";
 
