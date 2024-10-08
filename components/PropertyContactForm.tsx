@@ -36,7 +36,8 @@ const PropertyContactForm: FC<IPropertyProp> = ({ property }) => {
             type="hidden"
             id="recipient"
             name="recipient"
-            defaultValue={property._id}
+            // @ts-ignore
+            defaultValue={property.owner}
           />
           <div className="mb-4">
             <label

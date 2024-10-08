@@ -1,7 +1,6 @@
 "use server";
 
 import connectDb from "@/config/database";
-import { IPropertyData } from "@/interfaces";
 import Message from "@/models/Message";
 import { getSessionUser } from "@/utils/getSessionUser";
 
@@ -16,29 +15,45 @@ async function addMessage(
 ): Promise<IMessageResponse> {
   await connectDb();
   const sessionUser = await getSessionUser();
+
+  // Проверяем наличие авторизации пользователя
   if (!sessionUser || !sessionUser.userId) {
-    throw new Error("User ID is required");
+    return { error: "User is not authenticated" };
   }
 
   const { userId } = sessionUser;
+
+  // Получаем recipient из формы и проверяем его наличие
   const recipient = formData.get("recipient");
+  if (!recipient) {
+    return { error: "Recipient is required" };
+  }
+
+  // Не допускаем отправку сообщения самому себе
   if (userId === recipient) {
     return { error: "You cannot send a message to yourself" };
   }
 
-  const newMessage = new Message({
-    sender: userId,
-    recipient,
-    property: formData.get("property"),
-    name: formData.get("name"),
-    email: formData.get("email"),
-    phone: formData.get("phone"),
-    body: formData.get("body"),
-  });
+  try {
+    // Создаем новое сообщение
+    const newMessage = new Message({
+      sender: userId,
+      recipient,
+      property: formData.get("property"),
+      name: formData.get("name"),
+      email: formData.get("email"),
+      phone: formData.get("phone"),
+      body: formData.get("body"),
+    });
 
-  await newMessage.save();
+    // Сохраняем сообщение в базу данных
+    await newMessage.save();
 
-  return { submitted: true };
+    return { submitted: true };
+  } catch (error) {
+    console.error("Error while saving message:", error);
+    return { error: "Failed to save message. Please try again." };
+  }
 }
 
 export default addMessage;

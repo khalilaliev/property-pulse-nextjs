@@ -3,8 +3,8 @@ import "@/models/Property";
 import connectDb from "@/config/database";
 import { ISessionUser, getSessionUser } from "@/utils/getSessionUser";
 import Message from "@/models/Message";
-import { convertToSerializableObject } from "@/utils/convertObjectToJs";
 import { IMessage } from "@/interfaces";
+import MessageCard from "@/components/MessageCard";
 
 const MessagesPage: FC = async () => {
   await connectDb();
@@ -12,6 +12,8 @@ const MessagesPage: FC = async () => {
   const sessionUser = await getSessionUser();
 
   const { userId } = sessionUser as ISessionUser;
+
+  console.log("id", userId);
 
   const readMessages = await Message.find({ recipient: userId, read: true })
     .sort({ createdAt: -1 })
@@ -61,7 +63,8 @@ const MessagesPage: FC = async () => {
               <p>You have no messages</p>
             ) : (
               messages.map((message) => (
-                <h3 key={message._id}> {message.name}</h3>
+                // @ts-ignore
+                <MessageCard key={message._id} message={message} />
               ))
             )}
           </div>
