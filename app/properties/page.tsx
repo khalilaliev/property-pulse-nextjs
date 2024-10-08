@@ -1,13 +1,25 @@
 import connectDb from "@/config/database";
 import Property from "@/models/Property";
-import { IProperty } from "@/interfaces";
+import { IPaginationInner, IProperty } from "@/interfaces";
 import PropertyCard from "@/components/Card/PropertyCard";
 import { FC } from "react";
+import Pagination from "@/components/Pagination";
 
-const PropertiesPage: FC = async () => {
+interface IPagination {
+  searchParams: IPaginationInner;
+}
+
+const PropertiesPage: FC<IPagination> = async ({
+  searchParams: { page = 1, pageSize = 9 },
+}) => {
   await connectDb();
+  const skip: number = (page - 1) * pageSize;
+  const total = await Property.countDocuments([]);
+  const properties = (await Property.find({})
+    .skip(skip)
+    .limit(pageSize)) as IProperty[];
 
-  const properties = (await Property.find({}).lean()) as IProperty[];
+  const showPagination = total > pageSize;
 
   return (
     <section className="px-4 py-6">
@@ -20,6 +32,13 @@ const PropertiesPage: FC = async () => {
               <PropertyCard key={property._id} property={property} />
             ))}
           </div>
+        )}
+        {showPagination && (
+          <Pagination
+            page={Number(page)}
+            pageSize={Number(pageSize)}
+            totalItems={total}
+          />
         )}
       </div>
     </section>
