@@ -1,4 +1,5 @@
 import "@/assets/style/globals.css";
+import "photoswipe/dist/photoswipe.css";
 import "react-toastify/dist/ReactToastify.css";
 import AuthProvider from "@/components/AuthProvider";
 import Footer from "@/components/Footer";
